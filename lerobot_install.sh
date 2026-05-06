@@ -31,7 +31,7 @@ conda activate lerobot
 
 # Install dependencies
 echo "▶ Installing ffmpeg 7.1.1 from conda-forge…"
-conda install -y -c conda-forge ffmpeg=7.1.1
+conda install -y -c conda-forge ffmpeg
 
 echo "▶ Installing lerobot in editable mode…"
 pip install -e ./lerobot
