@@ -25,10 +25,10 @@ POLICY_TYPE="act" #see list on lerobot
 POLICY_REPO_NAME="act_policy"
 
 lerobot-record \
-  --robot.type=bi_so_follower \
-  --robot.left_arm_config.port=/dev/can0 \
-  --robot.right_arm_config.port=/dev/can1 \
-  --robot.id=bimanual_follower \
+  --robot.type=bi_openarm_follow \
+  --robot.left_arm_config.port=can0 \
+  --robot.right_arm_config.port=can1 \
+  --robot.id=my_openarm_follower \
   --robot.left_arm_config.cameras='{
     wrist: {"type": "opencv", "index_or_path": 6, "width": 1280, "height": 720, "fps": 30},
     top: {"type": "opencv", "index_or_path": 11, "width": 640, "height": 480, "fps": 30},
@@ -36,10 +36,10 @@ lerobot-record \
   --robot.right_arm_config.cameras='{
     wrist: {"type": "opencv", "index_or_path": 11, "width": 1280, "height": 720, "fps": 30},
   }' \
-  --teleop.type=bi_so_leader \
-  --teleop.left_arm_config.port=/dev/ttyACM0 \
-  --teleop.right_arm_config.port=/dev/ttyACM1 \
-  --teleop.id=bimanual_leader \
+  --teleop.type=openarm_mini \
+  --teleop.port_left=/dev/ttyACM0 \
+  --teleop.port_right=/dev/ttyACM1 \
+  --teleop.id=my_openarm_leader \
   --display_data=true \
   --dataset.repo_id=${HF_USER}/${TRAINING_DATASET_NAME} \
   --dataset.num_episodes=25 \
@@ -51,10 +51,10 @@ lerobot-record \
 #replay episode
 EPISODE_NUMBER=0
 lerobot-replay \
-  --robot.type=bi_so_follower \
-  --robot.left_arm_config.port=/dev/can0 \
-  --robot.right_arm_config.port=/dev/can1 \
-  --robot.id=bimanual_follower \
+  --robot.type=bi_openarm_follower \
+  --robot.left_arm_config.port=can0 \
+  --robot.right_arm_config.port=can1 \
+  --robot.id=my_openarm_follower \
   --robot.left_arm_config.cameras='{
     wrist: {"type": "opencv", "index_or_path": 6, "width": 1280, "height": 720, "fps": 30},
     top: {"type": "opencv", "index_or_path": 11, "width": 640, "height": 480, "fps": 30},
@@ -82,10 +82,10 @@ hf upload ${HF_USER}/${POLICY_TYPE}_${TRAINING_DATASET_NAME} \
 
 # Run inference
 lerobot-record  \
-  --robot.type=bi_so_follower \
-  --robot.left_arm_config.port=/dev/can0 \
-  --robot.right_arm_config.port=/dev/can1 \
-  --robot.id=bimanual_follower \
+  --robot.type=bi_openarm_follower \
+  --robot.left_arm_config.port=can0 \
+  --robot.right_arm_config.port=can1 \
+  --robot.id=my_openarm_follower \
   --robot.left_arm_config.cameras='{
     wrist: {"type": "opencv", "index_or_path": 6, "width": 1280, "height": 720, "fps": 30},
     top: {"type": "opencv", "index_or_path": 11, "width": 640, "height": 480, "fps": 30},
